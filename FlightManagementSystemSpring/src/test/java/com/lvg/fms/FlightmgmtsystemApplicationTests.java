@@ -1,13 +1,12 @@
 package com.lvg.fms;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -52,7 +51,10 @@ class FlightmgmtsystemApplicationTests {
 	@InjectMocks
 	private AirportService airportService;
 	
-	
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
 	
 	
 	@Test
@@ -62,7 +64,8 @@ class FlightmgmtsystemApplicationTests {
 		airportList.add(new Airport("2","Bhegumpet","Bhegumpet"));
 		Mockito.when(adao.findAll()).thenReturn(airportList);
 		List<Airport> result=adao.findAll();
-		assertEquals(2,airportList.size());
+		verify(adao,Mockito.times(1)).findAll();
+		//assertEquals(2,result.size());
 	}
 	
 	
@@ -75,15 +78,6 @@ class FlightmgmtsystemApplicationTests {
 		adao.save(airport);
 		
 	}
-	/*@Test
-	public void testviewAirport() {
-		Airport airport=new Airport("4","Rajiv","Hyd");
-		Mockito.when(adao.findById(airport)).thenReturn(airport);
-		Airport air=airportService.viewAirport("4");
-		assertEquals(air,airport);
-		assertEquals("4",air.getAirportCode());
-		
-	}*/
 	
 	@Test
 	public void updateAirport() {
@@ -113,7 +107,8 @@ class FlightmgmtsystemApplicationTests {
 		flightList.add(new Flight(23,"Aero","Emairates",60));
 		Mockito.when(fdao.findAll()).thenReturn(flightList);
 		List<Flight> result=fdao.findAll();
-		assertEquals(2,result.size());
+		verify(fdao,Mockito.times(1)).findAll();
+		//assertEquals(2,result.size());
 	}
 	
 	@Test
@@ -163,7 +158,8 @@ class FlightmgmtsystemApplicationTests {
 		passengerList.add(new Passenger(2,"preethi",21,45,"Female"));
 		Mockito.when(pdao.findAll()).thenReturn(passengerList);
 		List<Passenger> result=pdao.findAll();
-		assertEquals(2,result.size());
+		verify(pdao,Mockito.times(1)).findAll();
+		//assertEquals(2,result.size());
 	}
 	
 	@Test
@@ -206,7 +202,8 @@ class FlightmgmtsystemApplicationTests {
 		userList.add(new Userdata(2,"customer","preethi","preethi",995938111,"preethi@gmail.com",null));
 		Mockito.when(udao.findAll()).thenReturn(userList);
 		List<Userdata> result=udao.findAll();
-		assertEquals(2,result.size());
+		verify(udao,Mockito.times(1)).findAll();
+		//assertEquals(2,result.size());
 	}
 	
 	@Test
@@ -251,7 +248,8 @@ class FlightmgmtsystemApplicationTests {
 		bookingList.add(new Booking("16","5/7/2020",900,99,null,null,"preethi"));
 		Mockito.when(bookingDao.findAll()).thenReturn(bookingList);
 		List<Booking> result=bookingDao.findAll();
-		assertEquals(2,result.size());
+		verify(bookingDao,Mockito.times(1)).findAll();
+		//assertEquals(2,result.size());
 	}
 	
 	
